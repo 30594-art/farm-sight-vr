@@ -1,95 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 25% 97%;
+    --foreground: 222 84% 5%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 84% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 84% 5%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 152 100% 50%;
+    --primary-foreground: 222 84% 5%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 200 100% 50%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 20% 93%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 96% 56%;
+    --accent-foreground: 222 84% 5%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 152 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom smart farm tokens */
+    --neon-green: 152 100% 50%;
+    --neon-blue: 200 100% 50%;
+    --neon-green-raw: #00ff88;
+    --neon-blue-raw: #00b4ff;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -100,6 +59,194 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sora;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(210 33% 98%) 100%);
   }
+}
+
+@layer components {
+  .premium-card {
+    @apply bg-card border-[1.5px] border-border rounded-2xl p-6 transition-all duration-300 relative overflow-hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .premium-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .premium-card:hover {
+    border-color: hsl(var(--neon-green));
+    box-shadow: 0 16px 40px rgba(0, 255, 136, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+  }
+
+  .premium-card:hover::before {
+    opacity: 1;
+  }
+
+  .premium-card-green {
+    @apply premium-card;
+    border-top: 4px solid hsl(var(--neon-green));
+  }
+
+  .premium-card-blue {
+    @apply premium-card;
+    border-top: 4px solid hsl(var(--neon-blue));
+  }
+
+  .grad-text {
+    background: linear-gradient(135deg, hsl(var(--neon-green)), hsl(var(--neon-blue)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .data-label {
+    @apply text-[11px] font-bold tracking-widest uppercase text-muted-foreground mb-1.5;
+  }
+
+  .data-value {
+    @apply text-4xl font-extrabold leading-tight text-foreground mb-1;
+  }
+
+  .data-unit {
+    @apply text-[13px] font-medium text-muted-foreground;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-2 px-3.5 py-2 rounded-[10px] text-xs font-semibold transition-all duration-300;
+  }
+
+  .status-active {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00b347;
+  }
+
+  .status-inactive {
+    background: rgba(200, 213, 227, 0.3);
+    @apply text-muted-foreground;
+  }
+
+  .toggle-switch {
+    @apply relative w-14 h-8 rounded-2xl cursor-pointer border-none p-0 transition-all duration-400;
+    background: hsl(var(--muted));
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .toggle-switch.active {
+    background: hsl(var(--neon-green));
+    box-shadow: 0 0 24px rgba(0, 255, 136, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .toggle-knob {
+    @apply absolute w-7 h-7 bg-white rounded-full top-0.5 left-0.5 transition-all duration-400;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .toggle-switch.active .toggle-knob {
+    transform: translateX(24px);
+  }
+
+  .icon-box {
+    @apply w-10 h-10 rounded-[10px] flex items-center justify-center text-xl;
+  }
+
+  .icon-box-blue {
+    background: rgba(0, 180, 255, 0.15);
+  }
+
+  .icon-box-green {
+    background: rgba(0, 255, 136, 0.15);
+  }
+
+  .progress-track {
+    @apply w-full h-2.5 rounded-full overflow-hidden;
+    background: hsl(var(--muted));
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full transition-all duration-600;
+    background: linear-gradient(90deg, hsl(var(--neon-green)), hsl(var(--neon-blue)));
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.5);
+  }
+
+  .stat-mini-box {
+    @apply border border-border rounded-[10px] p-3 text-center transition-all duration-300;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.06), rgba(0, 180, 255, 0.06));
+  }
+
+  .stat-mini-box:hover {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.12), rgba(0, 180, 255, 0.12));
+    border-color: hsl(var(--neon-green));
+    transform: translateY(-2px);
+  }
+
+  .gauge-widget {
+    @apply relative w-40 h-40 mx-auto mb-4;
+  }
+
+  .gauge-bg {
+    @apply absolute inset-0 rounded-full;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05), 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .gauge-center {
+    @apply absolute rounded-full bg-card flex flex-col items-center justify-center;
+    inset: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .section-header {
+    @apply flex items-center gap-3 mb-5 pb-3 border-b-2 border-border;
+  }
+}
+
+@layer utilities {
+  .font-sora {
+    font-family: 'Sora', sans-serif;
+  }
+
+  .font-fira {
+    font-family: 'Fira Code', monospace;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-in {
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+.delay-5 { animation-delay: 0.4s; }
+
+.pulse-dot-anim {
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+.pulse-glow-anim {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
