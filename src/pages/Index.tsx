@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Droplets, Wind, CloudRain, Fan, Sun, Leaf, Zap, Gauge } from 'lucide-react';
 import Greenhouse3D from '@/components/Greenhouse3D';
+import FeaturesSection from '@/components/FeaturesSection';
 
 // Toggle Switch Component
 function ToggleSwitch({ active, onToggle }: { active: boolean; onToggle: () => void }) {
@@ -143,6 +144,9 @@ export default function Index() {
             💡 Drag to rotate • Scroll to zoom • Reflects live system states
           </div>
         </section>
+
+        {/* FEATURES SECTION */}
+        <FeaturesSection />
 
         {/* 3 Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-7">
